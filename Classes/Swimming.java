@@ -264,6 +264,112 @@ public class Swimming {
         System.out.println("Booking change is successful!");
     }
 
+    // Function for attending lessons
+    void attendLesson() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please Enter your name: ");
+        String name = input.next();
+        System.out.println("Please Enter your phone number: ");
+        String phone = input.next();
+        int ind = -1;
+        for (int i = 1; i <= totalLearner; i++) {
+            if (learners[i].getName().equals(name) && learners[i].getPhone().equals(phone)) {
+                ind = i;
+                break;
+            }
+        }
+        if (ind == -1) {
+            System.out.println("Invalid learner");
+            return;
+        }
+        if (learners[ind].getLesson1() < 1 && learners[ind].getLesson2() < 1) {
+            System.out.println("Learner has no lessons booked...");
+            return;
+        }
+        int g1 = -1, g2 = -1;
+        if (learners[ind].getLesson1() > 0)
+            g1 = learners[ind].getLesson1();
+        if (learners[ind].getLesson2() > 0)
+            g2 = learners[ind].getLesson2();
+        System.out.println("Choose which of the below lessons you want to attend: ");
+        if (g1 != -1)
+            System.out.println(g1);
+        if (g2 != -1)
+            System.out.println(g2);
+        int opt = input.nextInt();
+        if (opt != g1 && opt != g2) {
+            System.out.println("Invalid lesson chosen");
+            return;
+        }
+        if (opt == g1) {
+            if (learners[ind].getAttended1() == true) {
+                System.out.println("Already booked ..");
+                return;
+            }
+            learners[ind].setAttended1(true);
+        } else {
+            if (learners[ind].getAttended2() == true) {
+                System.out.println("Already booked ..");
+                return;
+            }
+            learners[ind].setAttended2(true);
+        }
+        System.out.println("Successfully attended the lesson " + opt);
+        System.out.println("Please provide a review for your coach: ");
+        String review = input.next();
+        System.out.println("Successfully provided the review");
+        if (opt == learners[ind].getGrade() + 1 && learners[ind].getGrade() + 1 <= 5)
+            learners[ind].setGrade(learners[ind].getGrade() + 1);
+        System.out.println("Please provide a numerical rating of the lesson ranging from 1 to 5");
+        System.out.println("1: Very dissatisfied");
+        System.out.println("2: Dissatisfied");
+        System.out.println("3: OK");
+        System.out.println("4: Satisfied");
+        System.out.println("5: Very Satisfied");
+
+        int r = input.nextInt();
+        while (r < 1 || r > 5) {
+            System.out.println("Please provide rating between 1 and 5");
+            r = input.nextInt();
+        }
+        int coachIndex = lessonCoachIndex[opt];
+        coaches[coachIndex].setTotalRating(coaches[coachIndex].getTotalRating() + r);
+        coaches[coachIndex].setFeedbackCount(coaches[coachIndex].getFeedbackCount() + 1);
+        coaches[coachIndex].setReview(coaches[coachIndex].getFeedbackCount(), review);
+
+        System.out.println("Thanks for providing rating ");
+    }
+
+    // Function for monthly report of learners
+    void learnerReport() {
+        for (int i = 1; i <= totalLearner; i++) {
+            System.out.println("The learner number: " + i);
+            System.out.println("Name: " + learners[i].getName());
+            System.out.println("Age: " + learners[i].getAge());
+            System.out.println("Phone: " + learners[i].getPhone());
+            System.out.println("Booked lessons: ");
+            if (learners[i].getLesson1() > 0)
+                System.out.println("  " + learners[i].getLesson1());
+            if (learners[i].getLesson2() > 0)
+                System.out.println("  " + learners[i].getLesson2());
+            for (int j = 1; j <= learners[i].getCancelCount(); j++) {
+                System.out.println("  " + learners[i].getCancel()[j]);
+            }
+            System.out.println("Attended lessons: ");
+            if (learners[i].getAttended1())
+                System.out.println("  " + learners[i].getLesson1());
+            if (learners[i].getAttended2())
+                System.out.println("  " + learners[i].getLesson2());
+            System.out.println("Canceled lessons: ");
+            for (int j = 1; j <= learners[i].getCancelCount(); j++) {
+                System.out.println("  " + learners[i].getCancel()[j]);
+            }
+            System.out.println();
+            System.out.println();
+            System.out.println();
+        }
+    }
+
     public static void main(String args[]) {
 
     }
