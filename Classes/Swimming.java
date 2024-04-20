@@ -174,6 +174,96 @@ public class Swimming {
         System.out.println("Lesson " + interestedLesson + " is successfully booked by " + name);
     }
 
+    // Function for changing booking
+    void changeBooking() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please Enter your name: ");
+        String name = input.next();
+        System.out.println("Please Enter your phone number: ");
+        String phone = input.next();
+        int ind = -1;
+        for (int i = 1; i <= totalLearner; i++) {
+            if (learners[i].getName().equals(name) && learners[i].getPhone().equals(phone)) {
+                ind = i;
+                break;
+            }
+        }
+        if (ind == -1) {
+            System.out.println("Invalid learner");
+            return;
+        }
+        System.out.println("What lesson do you want to change or cancel?");
+        int opt = input.nextInt();
+        if (opt < 1 || opt > 44) {
+            System.out.println("Invalid lesson");
+            return;
+        }
+        if (opt == learners[ind].getLesson1() && learners[ind].getAttended1() == false) {
+            learnerTaken[learners[ind].getLesson1()]--;
+            learners[ind].setCancelCount(learners[ind].getCancelCount() + 1);
+            learners[ind].getCancel()[learners[ind].getCancelCount()] = learners[ind].getLesson1();
+            learners[ind].setLesson1(0);
+        } else if (opt == learners[ind].getLesson2() && learners[ind].getAttended2() == false) {
+            learnerTaken[learners[ind].getLesson2()]--;
+            learners[ind].setCancelCount(learners[ind].getCancelCount() + 1);
+            learners[ind].getCancel()[learners[ind].getCancelCount()] = learners[ind].getLesson2();
+            learners[ind].setLesson2(0);
+        }
+
+        else {
+            System.out.print("Sorry, You can not cancel...");
+            return;
+        }
+        System.out.println("Do you want to cancel only or change the lessons?");
+        System.out.println("Press 1 to cancel only");
+        System.out.println("Press any other key to change");
+        int choice = input.nextInt();
+        if (choice == 1) {
+            return;
+        }
+        int grade = learners[ind].getGrade();
+
+        int[] canTake = new int[50];
+        int cnt = 0;
+        for (int i = 1; i <= 44; i++) {
+            if (forGrade[i] != grade && forGrade[i] != grade + 1)
+                continue;
+            if (forGrade[learners[ind].getLesson1()] == forGrade[i]
+                    || forGrade[learners[ind].getLesson2()] == forGrade[i])
+                continue;
+            if (learnerTaken[i] < 4) {
+                cnt++;
+                canTake[cnt] = i;
+            }
+        }
+
+        System.out.println("You can take the following lessons: Enter the lesson number you want to book ");
+        for (int i = 1; i <= cnt; i++) {
+            int x = canTake[i];
+            System.out.println("Lesson no: " + x);
+        }
+
+        int interestedLesson = input.nextInt();
+        Boolean f = false;
+        for (int i = 1; i <= cnt; i++)
+            if (interestedLesson == canTake[i])
+                f = true;
+        if (f == false) {
+            System.out.println("Invalid option chosen");
+            return;
+        }
+
+        if (learners[ind].getLesson1() < 1) {
+            learners[ind].setLesson1(interestedLesson);
+        } else {
+            learners[ind].setLesson2(interestedLesson);
+        }
+
+        learnerTaken[interestedLesson]++;
+
+        System.out.println("Booking change is successful!");
+    }
+
     public static void main(String args[]) {
 
     }
