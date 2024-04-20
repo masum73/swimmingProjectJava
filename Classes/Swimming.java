@@ -48,7 +48,7 @@ public class Swimming {
         // 3 coaches are preRegistered.
         this.totalCoach = 3;
         // Pre-register learners and coaches
-        // this.init();
+        this.init();
     }
 
     // Get and set functions for accessing private elements
@@ -370,7 +370,137 @@ public class Swimming {
         }
     }
 
-    public static void main(String args[]) {
+    // Function for monthly report of coaches
+    void coachReport() {
+        for (int i = 1; i <= totalCoach; i++) {
+            System.out.println("Coach No: " + i);
+            System.out.println("Name: " + coaches[i].getName());
+            System.out.println("Phone: " + coaches[i].getPhone());
+            System.out.println("Total feedback: " + coaches[i].getFeedbackCount());
+            if (coaches[i].getFeedbackCount() > 0)
+                System.out.println("Average rating: " + coaches[i].getTotalRating() / coaches[i].getFeedbackCount());
+            else
+                System.out.println("Average rating: 0");
+            System.out.println("All reviews:");
+            for (int x = 1; x <= coaches[i].getFeedbackCount(); x++)
+                System.out.println(coaches[i].getReview()[x]);
+            System.out.println();
+            System.out.println();
+        }
+    }
 
+    // Function for Registering new learner
+    void registerLearner() {
+        int grade;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please Enter your name: ");
+        String name = input.next();
+        System.out.println("Please Enter your gender: ");
+        String gender = input.next();
+        System.out.println("Please Enter your age: ");
+        int age = input.nextInt();
+        if (age < 4 || age > 11) {
+            System.out.println("Sorry the age limit is invalid...The age can only be between 4 to 11..");
+            return;
+        }
+        System.out.println("Please Enter your phone number: ");
+        String phone = input.next();
+
+        if (age == 4 || age == 5)
+            grade = 1;
+        else if (age == 6 || age == 7)
+            grade = 2;
+        else if (age == 8 || age == 9)
+            grade = 3;
+        else if (age == 10)
+            grade = 4;
+        else
+            grade = 5;
+
+        totalLearner++;
+
+        Learner singleLearner = new Learner(name, gender, age, phone, grade);
+        learners[totalLearner] = singleLearner;
+
+        System.out.println("Learner has been registered successfully..");
+    }
+
+    // Function for preregistered Coaches and Learners
+    void init() {
+        Coach coach1 = new Coach("Tamim", "0175970000");
+        coaches[1] = coach1;
+        Coach coach2 = new Coach("Sakib", "0155579000");
+        coaches[2] = coach2;
+        Coach coach3 = new Coach("Riyad", "0132610000");
+        coaches[3] = coach3;
+        totalCoach = 3;
+
+        totalLearner++;
+
+        Learner singleLearner1 = new Learner();
+        learners[totalLearner] = singleLearner1;
+
+        learners[totalLearner].setName("Sabbir");
+        learners[totalLearner].setGender("Male");
+        learners[totalLearner].setAge(14);
+        learners[totalLearner].setPhone("01520000000");
+        learners[totalLearner].setAttended1(false);
+        learners[totalLearner].setAttended2(false);
+        learners[totalLearner].setLesson1(0);
+        learners[totalLearner].setLesson2(0);
+        learners[totalLearner].setGrade(5);
+        // learnerTaken[5]++;
+        totalLearner++;
+        // System.out.println("Total"+totalLearner);
+
+        Learner singleLearner2 = new Learner("Shaikat", "Male", 5, "01750000000", 1);
+        learners[totalLearner] = singleLearner2;
+
+        learners[totalLearner].setName("Shaikat");
+        learners[totalLearner].setGender("Male");
+        learners[totalLearner].setAge(5);
+        learners[totalLearner].setPhone("01750000000");
+        learners[totalLearner].setGrade(1);
+        // learnerTaken[2]++;
+    }
+
+    public static void main(String args[]) {
+        Swimming instance = new Swimming();
+        // instance.init();
+
+        while (true) {
+            System.out.println("Choose any option: \n ");
+            System.out.println("0. Exit program\n");
+            System.out.println("1. Book a swimming lesson\n");
+            System.out.println("2. Change/Cancel a booking\n");
+            System.out.println("3. Attend a swimming lesson\n");
+            System.out.println("4. Monthly learner report\n");
+            System.out.println("5. Monthly coach report\n");
+            System.out.println("6. Register a new learner\n");
+
+            Scanner input = new Scanner(System.in);
+            int opt = input.nextInt();
+            if (opt == 1) {
+                instance.bookLesson();
+            } else if (opt == 2) {
+                instance.changeBooking();
+            } else if (opt == 3) {
+                instance.attendLesson();
+            } else if (opt == 4) {
+                instance.learnerReport();
+            } else if (opt == 5) {
+                instance.coachReport();
+            } else if (opt == 6) {
+                instance.registerLearner();
+            } else if (opt == 0) {
+                System.out.println("Exited successfully\n");
+                break;
+            }
+            try {
+                Thread.sleep(2000); // 2000 milliseconds = 2 seconds
+            } catch (InterruptedException e) {
+
+            }
+        }
     }
 }
