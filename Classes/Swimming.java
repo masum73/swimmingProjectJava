@@ -88,6 +88,92 @@ public class Swimming {
         this.learners[ind] = l;
     }
 
+    // function for booking lessons
+    void bookLesson() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please Enter your name: ");
+        String name = input.next();
+        System.out.println("Please Enter your phone numbers: ");
+        String phone = input.next();
+        int ind = -1;
+        for (int i = 1; i <= totalLearner; i++) {
+            if (learners[i].getName().equals(name) && learners[i].getPhone().equals(phone)) {
+                ind = i;
+                break;
+            }
+        }
+        if (ind == -1) {
+            System.out.println("Invalid learner");
+            return;
+        }
+        int grade = learners[ind].getGrade();
+        int[] canTake = new int[50];
+        int cnt = 0;
+        for (int i = 1; i <= 44; i++) {
+            // System.out.println(forgrade[i]+" "+grade);
+            if (forGrade[i] != grade && forGrade[i] != grade + 1)
+                continue;
+
+            if (forGrade[learners[ind].getLesson1()] == forGrade[i]
+                    || forGrade[learners[ind].getLesson2()] == forGrade[i])
+                continue;
+            if (learnerTaken[i] < 4) {
+                cnt++;
+                // System.out.println("I: "+i);
+                canTake[cnt] = i;
+            }
+        }
+        System.out.println("View the timetable and select a lesson ");
+        System.out.println("Press 1 to view by specifying the day ");
+        System.out.println("Press 2 to view by specifying the grade level ");
+        System.out.println("Press 3 to view by specifying the coach's name ");
+        int opt = input.nextInt();
+        if (opt == 1) {
+            System.out.println("The available day for you: ");
+            for (int i = 1; i <= cnt; i++) {
+                int x = canTake[i];
+                System.out.println("For week " + weekNo[x] + " " + lessonDate[x] + " at " + lessonTime[x]
+                        + " for lesson no: " + x);
+            }
+        } else if (opt == 2) {
+            System.out.println("The available grade for you: ");
+            for (int i = 1; i <= cnt; i++) {
+                int x = canTake[i];
+                System.out.println("For grade " + forGrade[x] + " , lesson no: " + x);
+            }
+        } else if (opt == 3) {
+            System.out.println("The available coaches for you: ");
+            for (int i = 1; i <= cnt; i++) {
+                int x = canTake[i];
+                System.out.println("For Coach name : " + lessonCoach[x] + " , lesson no: " + x);
+            }
+        } else {
+            System.out.println("Invalid number pressed!!!");
+            return;
+        }
+        if (cnt < 1) {
+            System.out.println("Sorry... no lessons available for booking");
+            return;
+        }
+        System.out.println("Choose an available lesson number that mentioned above..");
+        int interestedLesson = input.nextInt();
+        Boolean f = false;
+        for (int i = 1; i <= cnt; i++)
+            if (interestedLesson == canTake[i])
+                f = true;
+        if (f == false) {
+            System.out.println("Invalid option chosen");
+            return;
+        }
+
+        if (learners[ind].getLesson1() < 1) {
+            learners[ind].setLesson1(interestedLesson);
+        } else
+            learners[ind].setLesson2(interestedLesson);
+        learnerTaken[interestedLesson]++;
+        System.out.println("Lesson " + interestedLesson + " is successfully booked by " + name);
+    }
+
     public static void main(String args[]) {
 
     }
