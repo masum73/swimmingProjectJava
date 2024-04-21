@@ -225,7 +225,7 @@ public class Swimming {
         }
         System.out.println("Do you want to cancel only or change the lessons?");
         System.out.println("Press 1 to cancel only");
-        System.out.println("Press any other key to change");
+        System.out.println("Press any other number to change");
         int choice = input.nextInt();
         if (choice == 1) {
             return;
