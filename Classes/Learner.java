@@ -1,7 +1,7 @@
 package Classes;
 
 // Function for learner information
-class Learner {
+public class Learner {
     private String name;
     private String gender;
     private int age;
@@ -13,7 +13,8 @@ class Learner {
     private Boolean attended2;
     private int[] cancel;
     private int cancelcount;
-    //Constuctor of Learner class
+
+    // Constuctor of Learner class
     public Learner(String name, String gender, int age, String phone, int grade) {
         this.name = name;
         this.gender = gender;
@@ -24,11 +25,12 @@ class Learner {
         this.lesson2 = 0;
         this.attended1 = false;
         this.attended2 = false;
-        this.cancel= new int[50];
-        this.cancelcount=0;
+        this.cancel = new int[50];
+        this.cancelcount = 0;
     }
-     // getter and setter for accessing private variables
-     public String getName() {
+
+    // getter and setter for accessing private variables
+    public String getName() {
         return name;
     }
 
@@ -72,47 +74,46 @@ class Learner {
         return cancelcount;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public void setGender(String gender) {
         this.gender = gender;
     }
-    
+
     public void setAge(int age) {
         this.age = age;
     }
-    
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
+
     public void setGrade(int grade) {
         this.grade = grade;
     }
-    
+
     public void setLesson1(int lesson1) {
         this.lesson1 = lesson1;
     }
-    
+
     public void setLesson2(int lesson2) {
         this.lesson2 = lesson2;
     }
-    
+
     public void setAttended1(Boolean attended1) {
         this.attended1 = attended1;
     }
-    
+
     public void setAttended2(Boolean attended2) {
         this.attended2 = attended2;
     }
-    
+
     public void setCancel(int pos, int val) {
         this.cancel[pos] = val;
     }
-    
+
     public void setCancelCount(int cancelcount) {
         this.cancelcount = cancelcount;
     }

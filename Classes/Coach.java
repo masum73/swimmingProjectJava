@@ -1,12 +1,13 @@
 package Classes;
 
 // Class for Coach information
-class Coach {
+public class Coach {
     private String name;
     private String phone;
     private String[] review;
     private int feedbackCount;
     private int totalRating;
+
     // Constructor
     public Coach(String name, String phone) {
         this.name = name;
@@ -15,14 +16,17 @@ class Coach {
         this.feedbackCount = 0;
         this.totalRating = 0;
     }
+
     // getter setter
     public String getName() {
         return name;
     }
+
     public String getPhone() {
         return phone;
     }
-    public String[] getReview(){
+
+    public String[] getReview() {
         return review;
     }
 
@@ -33,6 +37,7 @@ class Coach {
     public int getFeedbackCount() {
         return feedbackCount;
     }
+
     public void setTotalRating(int totalRating) {
         this.totalRating = totalRating;
     }

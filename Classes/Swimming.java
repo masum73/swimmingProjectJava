@@ -1,20 +1,27 @@
 package Classes;
 
 import java.util.Scanner;
+import Classes.Learner;
+
+// This is the Swimming class where all basic functionalities of the project have been implemented
 
 public class Swimming {
     // For Day of the lessons
     String[] lessonDate = { "", "Monday", "Monday", "Monday", "Wednesday", "Wednesday", "Wednesday", "Friday", "Friday",
             "Friday", "Saturday", "Saturday", "Monday", "Monday", "Monday", "Wednesday", "Wednesday", "Wednesday",
+            "Friday",
+            "Friday", "Friday", "Saturday", "Saturday", "Monday", "Monday", "Monday", "Wednesday", "Wednesday",
+            "Wednesday",
             "Friday", "Friday", "Friday", "Saturday", "Saturday", "Monday", "Monday", "Monday", "Wednesday",
-            "Wednesday", "Wednesday", "Friday", "Friday", "Friday", "Saturday", "Saturday", "Monday", "Monday",
-            "Monday", "Wednesday", "Wednesday", "Wednesday", "Friday", "Friday", "Friday", "Saturday", "Saturday" };
+            "Wednesday",
+            "Wednesday", "Friday", "Friday", "Friday", "Saturday", "Saturday" };
 
     // For time for the lessons
     String[] lessonTime = { "", "4pm", "5pm", "6pm", "4pm", "5pm", "6pm", "4pm", "5pm", "6pm", "2pm", "3pm", "4pm",
-            "5pm", "6pm", "4pm", "5pm", "6pm", "4pm", "5pm", "6pm", "2pm", "3pm", "4pm", "5pm", "6pm", "4pm", "5pm",
-            "6pm", "4pm", "5pm", "6pm", "2pm", "3pm", "4pm", "5pm", "6pm", "4pm", "5pm", "6pm", "4pm", "5pm", "6pm",
-            "2pm", "3pm" };
+            "5pm",
+            "6pm", "4pm", "5pm", "6pm", "4pm", "5pm", "6pm", "2pm", "3pm", "4pm", "5pm", "6pm", "4pm", "5pm", "6pm",
+            "4pm",
+            "5pm", "6pm", "2pm", "3pm", "4pm", "5pm", "6pm", "4pm", "5pm", "6pm", "4pm", "5pm", "6pm", "2pm", "3pm" };
     // For storing coach name of the lessons
     String[] lessonCoach = { " ", "Sakib", "Tamim", "Riyad", "Sakib", "Tamim", "Riyad", "Sakib", "Tamim", "Riyad",
             "Sakib", "Tamim", "Sakib", "Tamim", "Riyad", "Sakib", "Tamim", "Riyad", "Sakib", "Tamim", "Riyad", "Sakib",
@@ -89,7 +96,7 @@ public class Swimming {
     }
 
     // function for booking lessons
-    void bookLesson() {
+    public void bookLesson() {
         Scanner input = new Scanner(System.in);
         System.out.println("Please Enter your name: ");
         String name = input.next();
@@ -132,8 +139,9 @@ public class Swimming {
             System.out.println("The available day for you: ");
             for (int i = 1; i <= cnt; i++) {
                 int x = canTake[i];
-                System.out.println("For week " + weekNo[x] + " " + lessonDate[x] + " at " + lessonTime[x]
-                        + " for lesson no: " + x);
+                System.out
+                        .println("For week " + weekNo[x] + " " + lessonDate[x] + " at " + lessonTime[x]
+                                + " for lesson no: " + x);
             }
         } else if (opt == 2) {
             System.out.println("The available grade for you: ");
@@ -175,7 +183,7 @@ public class Swimming {
     }
 
     // Function for changing booking
-    void changeBooking() {
+    public void changeBooking() {
         Scanner input = new Scanner(System.in);
         System.out.println("Please Enter your name: ");
         String name = input.next();
@@ -265,7 +273,7 @@ public class Swimming {
     }
 
     // Function for attending lessons
-    void attendLesson() {
+    public void attendLesson() {
         Scanner input = new Scanner(System.in);
         System.out.println("Please Enter your name: ");
         String name = input.next();
@@ -341,7 +349,7 @@ public class Swimming {
     }
 
     // Function for monthly report of learners
-    void learnerReport() {
+    public void learnerReport() {
         for (int i = 1; i <= totalLearner; i++) {
             System.out.println("The learner number: " + i);
             System.out.println("Name: " + learners[i].getName());
@@ -371,7 +379,7 @@ public class Swimming {
     }
 
     // Function for monthly report of coaches
-    void coachReport() {
+    public void coachReport() {
         for (int i = 1; i <= totalCoach; i++) {
             System.out.println("Coach No: " + i);
             System.out.println("Name: " + coaches[i].getName());
@@ -390,7 +398,7 @@ public class Swimming {
     }
 
     // Function for Registering new learner
-    void registerLearner() {
+    public void registerLearner() {
         int grade;
         Scanner input = new Scanner(System.in);
         System.out.println("Please Enter your name: ");
@@ -426,7 +434,7 @@ public class Swimming {
     }
 
     // Function for preregistered Coaches and Learners
-    void init() {
+    public void init() {
         Coach coach1 = new Coach("Tamim", "0175970000");
         coaches[1] = coach1;
         Coach coach2 = new Coach("Sakib", "0155579000");
@@ -437,7 +445,7 @@ public class Swimming {
 
         totalLearner++;
 
-        Learner singleLearner1 = new Learner();
+        Learner singleLearner1 = new Learner(null, null, totalLearner, null, totalCoach);
         learners[totalLearner] = singleLearner1;
 
         learners[totalLearner].setName("Sabbir");
@@ -503,4 +511,5 @@ public class Swimming {
             }
         }
     }
+
 }
