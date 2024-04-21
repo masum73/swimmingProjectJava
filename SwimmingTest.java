@@ -1,11 +1,4 @@
-package JUnit;
-
 import org.junit.jupiter.api.Test;
-
-import Classes.Learner;
-import Classes.Swimming;
-import Classes.Coach;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;

@@ -1,7 +1,8 @@
-package Classes;
 
 import java.util.Scanner;
-import Classes.Learner;
+
+// import Coach;
+// import Learner;
 
 // This is the Swimming class where all basic functionalities of the project have been implemented
 

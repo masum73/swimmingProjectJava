@@ -1,4 +1,3 @@
-package Classes;
 
 // Function for learner information
 public class Learner {

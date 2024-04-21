@@ -1,4 +1,3 @@
-package Classes;
 
 // Class for Coach information
 public class Coach {
